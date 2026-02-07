@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View, Alert } from 'react-native'
+import { View, Alert } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';	// npx expo install react-native-safe-area-context`
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { ProfileBanner } from '../ProfileBanner'
+import { PerfilBanner } from '../PerfilBanner'
 import { Tile, TileExtra } from '../Tiles'
+
+import { perfilView_css } from "../../css/perfilView_css";
 
 import icono_buscar from '../../icons/search.webp';
 import icono_calendario from '../../icons/calendar-plus.webp';
@@ -23,15 +25,15 @@ function PerfilContent({nombre_perfil, imagen_perfil}) {
 	const insets = useSafeAreaInsets(); // Obtenemos los márgenes seguros (esdecir que no obstaculizan): EJ: barra notificaciones
 
 	return (
-		<View style={[profileView_css.screen, { paddingTop: insets.top }]}>
+		<View style={[perfilView_css.screen, { paddingTop: insets.top }]}>
 			<StatusBar style="auto" />
 
-			<ProfileBanner
+			<PerfilBanner
 				nombre={nombre_perfil_prueba}
 				url_avatar={imagen_perfil_prueba}
 			/>
 
-			<View style={profileView_css.container_Tiles}>
+			<View style={perfilView_css.container_Tiles}>
 				<Tile onPress={mostrarAlerta}
 					icono={icono_buscar}
 					titulo='Eventos'
@@ -49,7 +51,7 @@ function PerfilContent({nombre_perfil, imagen_perfil}) {
 				/>
 			</View>
 
-			<View style={profileView_css.container_TilesExtra}>
+			<View style={perfilView_css.container_TilesExtra}>
 				<TileExtra onPress={mostrarAlerta}
 					icono={icono_amigos}
 					titulo='Tus amigos'
@@ -70,25 +72,3 @@ export function PerfilView() {
 		</SafeAreaProvider>
 	)
 }
-
-const profileView_css = StyleSheet.create({
-	screen: {
-		flex: 1, // Expándete para llenar todo el espacio libre que deje tu padre, para que no se superpongan los diversos componentes
-
-		alignItems: 'center',
-		justifyContent: 'space-around'
-	},
-	container_Tiles: {
-		flex: 1,
-		width: '100%',
-
-		alignItems: 'center',
-		justifyContent: 'space-around'
-	},
-	container_TilesExtra: {
-		flexDirection: 'row',
-		alignItems: 'center',
-
-		gap: 25,
-	}
-});
