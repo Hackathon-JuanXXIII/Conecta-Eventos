@@ -7,7 +7,7 @@ export function Tile({onPress, icono, titulo, desc}) {
         <Pressable style={tile_css.contenedor}
             onPress={onPress}
         >
-            <View style={tile_css.contenedoIcono}>
+            <View style={tile_css.contenedorIcono}>
                 <Image style={tile_css.icono}
                     source={icono}
                 />

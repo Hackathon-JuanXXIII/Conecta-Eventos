@@ -11,7 +11,7 @@ export const tile_css = StyleSheet.create({
 
         borderRadius: 10,
     },
-    contenedoIcono: {
+    contenedorIcono: {
         width: '20%',
 
         justifyContent: 'center',
