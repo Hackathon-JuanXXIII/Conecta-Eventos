@@ -9,14 +9,15 @@ import { useNavigation } from "@react-navigation/native";
 import { PerfilView } from '../../components/views/PerfilView';
 import { ListaEventosView } from "../../components/views/ListaEventosView";
 
+// Estilos CSS
+import { navigationBackBTN_css } from "../../css/navigationBackBTN_css";
+
 // Iconos
 import icono_atras from '../../icons/arrow-bend-up-left.webp'
 
 // propiedad options
 const stackoptions = {
-    headerTitle: '',           // Quita el texto del título/Pone el titulo sin nada escrito
-    headerTransparent: true,   // El header que se "pinta" por el navigation se "fusiona" con el fondo de la app
-    headerBackVisible: false,   // Deshabilita la flecha que retorna hacia atras
+    headerShown: false,   // Deshabilita/Quita el header que dibuja por defecto, y todos sus "relacionados"
 }
 
 const Stack = createNativeStackNavigator();
@@ -46,10 +47,10 @@ export function BackBTN() {
     const navigation = useNavigation()
 
     return (
-        <Pressable 
+        <Pressable style={navigationBackBTN_css.contenedor}
             onPress={() => navigation.goBack()}
         >
-            <Image
+            <Image style={navigationBackBTN_css.icono}
                 source={icono_atras}
             />
         </Pressable>
