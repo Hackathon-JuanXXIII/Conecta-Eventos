@@ -36,3 +36,19 @@ export function TileExtra({onPress, icono, titulo}) {
         </Pressable>
     )
 }
+
+export function TileEvento({onPress, nombre, dia, mes, id_categoria}) {
+    return (
+        <Pressable
+            onPress={onPress}
+            id={id_categoria}
+        >
+            <View>
+                <Text>{dia} {mes}</Text>
+            </View>
+            <View>
+                <Text>{nombre}</Text>
+            </View>
+        </Pressable>
+    )
+}
