@@ -1,5 +1,6 @@
 export const fConsumirAPIEventos = async() => {
     const ENDPOINT = 'https://hackathon.lausnchez.es/api/v1/eventos'
+    // Cambiar el token por el que venga del login, el que esta es de prueba
     const TOKEN = '47|GCKRMdY2MK3wxew1bXbRiiubDlNmFnf1xUTfmCcC75c00333'
 
    try {
