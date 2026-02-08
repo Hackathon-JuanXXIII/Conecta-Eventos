@@ -4,9 +4,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';	// npx expo 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { PerfilBanner } from '../PerfilBanner'
-import { Tile, TileExtra } from '../Tiles'
+import { Tile, TileExtra } from '../Tile'
 
 import { perfilView_css } from "../../css/perfilView_css";
+
+// No es necesario este import en el componente
+// import { NavigationPerfil } from "../../scripts/navigation/NavigationPerfil"
+// En su lugar usar ->
+import { useNavigation } from "@react-navigation/native";
 
 import icono_buscar from '../../icons/search.webp';
 import icono_calendario from '../../icons/calendar-plus.webp';
@@ -22,7 +27,10 @@ const mostrarAlerta = () => {
 };
 
 function PerfilContent({nombre_perfil, imagen_perfil}) {
-	const insets = useSafeAreaInsets(); // Obtenemos los márgenes seguros (esdecir que no obstaculizan): EJ: barra notificaciones
+	const insets = useSafeAreaInsets() // Obtenemos los márgenes seguros (esdecir que no obstaculizan): EJ: barra notificaciones
+
+	// Definir una constante que contendrá la lógica del "use" hook importado
+	const navigation = useNavigation()
 
 	return (
 		<View style={[perfilView_css.screen, { paddingTop: insets.top }]}>
@@ -34,7 +42,7 @@ function PerfilContent({nombre_perfil, imagen_perfil}) {
 			/>
 
 			<View style={perfilView_css.container_Tiles}>
-				<Tile onPress={mostrarAlerta}
+				<Tile onPress={() => navigation.navigate('ListaEventosView')}
 					icono={icono_buscar}
 					titulo='Eventos'
 					desc='Encuentra el evento perfecto para ti'
