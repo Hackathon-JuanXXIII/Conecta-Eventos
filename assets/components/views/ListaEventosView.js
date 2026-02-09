@@ -1,11 +1,11 @@
 import { View, Text, FlatList } from "react-native";
 import React, {useEffect, useState} from 'react'
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useNavigation } from "@react-navigation/native";
 
-// Coponentes
-import { BackBTN } from "../../scripts/navigation/NavigationPerfil";
+// Componentes - CAMBIAR ESTA LÍNEA
+import { BackBTN } from "../BackButton";
 import { TileEvento } from "../Tile";
 
 // Scripts
@@ -14,8 +14,8 @@ import { fConsumirAPIEventos } from "../../scripts/apiEventos";
 function ListaEventosContent() {
     const insets = useSafeAreaInsets();
     const [respuesta, setRespuesta] = useState([])
-    
-    // Consume la funcion con la que consumir la API
+    const navigation = useNavigation();
+
     useEffect(() => {
         const fObtenerRespuesta = async() => {
            const response = await fConsumirAPIEventos();
@@ -25,36 +25,35 @@ function ListaEventosContent() {
             }
         }
 
-        // Se ejecuta, lo de antes es la definición
         fObtenerRespuesta()
     }, [])
 
     const fExtraerFecha = (fechaString) => {
         const fecha = new Date(fechaString)
-
         const dia = fecha.getDate()
         const mes = fecha.toLocaleDateString('es-ES', {month: 'short'}).toUpperCase()
-
         return {dia, mes}
     }
 
     if (respuesta.length <= 0) {
         return (
-            <View style={{paddingTop: insets.top}}>
+            <View style={{paddingTop: insets.top, padding: 20}}>
                 <BackBTN/>
-
-                <Text>No hay eventos disponibles</Text>
+                <Text style={{fontSize: 18, textAlign: 'center', marginTop: 20, color: '#939393'}}>
+                    No hay eventos disponibles
+                </Text>
             </View>
         )
     } else {
         return (
-            <View style={{paddingTop: insets.top}}>
-                <BackBTN />
+            <View style={{paddingTop: insets.top, flex: 1}}>
+                <View style={{padding: 20}}>
+                    <BackBTN />
+                </View>
 
                 <FlatList
-                    // Cada objeto que se almacene en respuesta `<FlatList>` hace una iteración
+                    contentContainerStyle={{alignItems: 'center', paddingBottom: 20}}
                     data={respuesta}
-                    // `item` por asi decir seria como un "alias" con el que hacer referencia al objeto que contiene `respuesta`yyy
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({item}) => {
                         const { dia, mes } = fExtraerFecha(item.fecha_inicio_evento);
@@ -63,6 +62,7 @@ function ListaEventosContent() {
                                 nombre={item.nombre} 
                                 dia={dia} 
                                 mes={mes} 
+                                onPress={() => navigation.navigate('DetallesEventoView', { idEvento: item.id })}
                             />
                         );
                     }}
