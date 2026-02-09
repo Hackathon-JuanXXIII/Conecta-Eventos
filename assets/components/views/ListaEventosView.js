@@ -14,8 +14,8 @@ import { fConsumirAPIEventos } from "../../scripts/apiEventos";
 function ListaEventosContent() {
     const insets = useSafeAreaInsets();
     const [respuesta, setRespuesta] = useState([])
-    const navigation = useNavigation();
-
+    
+    // Consume la funcion con la que consumir la API
     useEffect(() => {
         const fObtenerRespuesta = async() => {
            const response = await fConsumirAPIEventos();
@@ -25,44 +25,51 @@ function ListaEventosContent() {
             }
         }
 
+        // Se ejecuta, lo de antes es la definición
         fObtenerRespuesta()
     }, [])
 
     const fExtraerFecha = (fechaString) => {
         const fecha = new Date(fechaString)
+
         const dia = fecha.getDate()
         const mes = fecha.toLocaleDateString('es-ES', {month: 'short'}).toUpperCase()
+
         return {dia, mes}
     }
 
     if (respuesta.length <= 0) {
         return (
-            <View style={{paddingTop: insets.top, padding: 20}}>
+            <View style={[listaEventos_css.screen,{paddingTop: insets.top}]}>
                 <BackBTN/>
-                <Text style={{fontSize: 18, textAlign: 'center', marginTop: 20, color: '#939393'}}>
-                    No hay eventos disponibles
-                </Text>
+
+                <Text>No hay eventos disponibles</Text>
             </View>
         )
     } else {
-        return (
-            <View style={{paddingTop: insets.top, flex: 1}}>
-                <View style={{padding: 20}}>
-                    <BackBTN />
-                </View>
+        // Imagen de prueba, cambiar por las imagenes devueltas por la API
+        const imagen = 'https://placehold.co/400x400/webp'
 
-                <FlatList
-                    contentContainerStyle={{alignItems: 'center', paddingBottom: 20}}
+        return (
+            <View style={{flex: 1, paddingTop: insets.top}}>
+                <BackBTN />
+
+                <FlatList style={listaEventos_css.lista}
+                    // `style` afecta solo al marco de la lista, esta propiedad hace que se centre en el propio contenido
+                    contentContainerStyle={listaEventos_css.screen}
+                    // Cada objeto que se almacene en respuesta `<FlatList>` hace una iteración
                     data={respuesta}
+                    // `item` por asi decir seria como un "alias" con el que hacer referencia al objeto que contiene `respuesta`yyy
                     keyExtractor={(item) => item.id.toString()}
+                    // renderItem vendria a ser el iterador para la lista `FlatList`
                     renderItem={({item}) => {
-                        const { dia, mes } = fExtraerFecha(item.fecha_inicio_evento);
                         return (
                             <TileEvento 
-                                nombre={item.nombre} 
-                                dia={dia} 
-                                mes={mes} 
-                                onPress={() => navigation.navigate('DetallesEventoView', { idEvento: item.id })}
+                                nombre={item.nombre}
+                                id_categoria={item.id_categoria}
+                                imagen={{uri: imagen}}
+                                tags={item.tags}
+                                categoria={item.categoria.nombre}
                             />
                         );
                     }}
