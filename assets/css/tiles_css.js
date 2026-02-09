@@ -117,7 +117,7 @@ export const tileEvento_css = StyleSheet.create({
     categoriaEvento: {
         color: '#FFFFFF',
 
-        fontSize: 8,
+        // fontSize: 8,
     },
     tagsEvento : {
         maxWidth: '90%',
