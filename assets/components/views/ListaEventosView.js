@@ -8,6 +8,9 @@ import { useNavigation } from "@react-navigation/native";
 import { BackBTN } from "../BackButton";
 import { TileEvento } from "../Tile";
 
+// Estilos CSS
+import { listaEventos_css } from "../../css/listaEventos_css";
+
 // Scripts
 import { fConsumirAPIEventos } from "../../scripts/apiEventos";
 
