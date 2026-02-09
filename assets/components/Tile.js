@@ -1,6 +1,6 @@
 import { View, Pressable, Text, Image } from 'react-native';
-
-import { tile_css, tileExtra_css } from '../css/tiles_css';
+// Estilos CSS
+import { tile_css, tileExtra_css, tileEvento_css } from '../css/tiles_css';
 
 export function Tile({onPress, icono, titulo, desc}) {
     return (
@@ -37,17 +37,42 @@ export function TileExtra({onPress, icono, titulo}) {
     )
 }
 
-export function TileEvento({onPress, nombre, dia, mes, id_categoria}) {
+export function TileEvento({onPress, nombre, id_categoria, imagen, categoria, tags}) {
+    const coloresTags = ['#D3E6FE', '#FFD1C7', '#C2F0D5'];
+
     return (
-        <Pressable
+        <Pressable style={tileEvento_css.contenedorEvento_base} 
             onPress={onPress}
-            id={id_categoria}
+            id_categoria={id_categoria}
         >
             <View>
-                <Text>{dia} {mes}</Text>
+                <Image style={tileEvento_css.imagenEvento}
+                    source={imagen}
+                />
             </View>
-            <View>
-                <Text>{nombre}</Text>
+            <View style={tileEvento_css.separator}></View>
+            <View style={tileEvento_css.descEvento}>
+                <Text style={tileEvento_css.nombreEvento}>
+                    {nombre}
+                </Text>
+                <Text style={tileEvento_css.categoriaEvento}>
+                    {categoria}
+                </Text>
+                <View style={tileEvento_css.tagsEvento}>
+                    {/* Recorro el array de tags e itero sobre él, pero antes trocear el array para que solo haya 3 objetos en él*/}
+                    {/* Se pone el interrogante a la derecha del array para que en el caso de que el array no contenga nada no ejecute `for`*/}
+                    {tags.length != 0 ? (
+                       tags?.slice(0, 3).map((tag, index) => (
+                            <Text key={index} style={{gap: 5, color: coloresTags[index]}}>
+                                #{tag}
+                            </Text>
+                        )) 
+                    ) : (
+                        <Text style={{}}>
+                            Sin etiquetas
+                        </Text>
+                    )}
+                </View>
             </View>
         </Pressable>
     )

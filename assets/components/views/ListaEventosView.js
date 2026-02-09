@@ -8,6 +8,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { BackBTN } from "../../scripts/navigation/NavigationPerfil";
 import { TileEvento } from "../Tile";
 
+// Estilos CSS
+import { listaEventos_css } from "../../css/listaEventos_css";
+
 // Scripts
 import { fConsumirAPIEventos } from "../../scripts/apiEventos";
 
@@ -40,29 +43,37 @@ function ListaEventosContent() {
 
     if (respuesta.length <= 0) {
         return (
-            <View style={{paddingTop: insets.top}}>
+            <View style={[listaEventos_css.screen,{paddingTop: insets.top}]}>
                 <BackBTN/>
 
                 <Text>No hay eventos disponibles</Text>
             </View>
         )
     } else {
+        // Imagen de prueba, cambiar por las imagenes devueltas por la API
+        const imagen = 'https://placehold.co/400x400/webp'
+
         return (
-            <View style={{paddingTop: insets.top}}>
+            <View style={{flex: 1, paddingTop: insets.top}}>
                 <BackBTN />
 
-                <FlatList
+                <FlatList style={listaEventos_css.lista}
+                    // `style` afecta solo al marco de la lista, esta propiedad hace que se centre en el propio contenido
+                    contentContainerStyle={listaEventos_css.screen}
                     // Cada objeto que se almacene en respuesta `<FlatList>` hace una iteración
                     data={respuesta}
                     // `item` por asi decir seria como un "alias" con el que hacer referencia al objeto que contiene `respuesta`yyy
                     keyExtractor={(item) => item.id.toString()}
+                    // renderItem vendria a ser el iterador para la lista `FlatList`
                     renderItem={({item}) => {
-                        const { dia, mes } = fExtraerFecha(item.fecha_inicio_evento);
+                        // const {dia, mes} = fExtraerFecha(item.fecha_inicio_evento);
                         return (
                             <TileEvento 
-                                nombre={item.nombre} 
-                                dia={dia} 
-                                mes={mes} 
+                                nombre={item.nombre}
+                                id_categoria={item.id_categoria}
+                                imagen={{uri: imagen}}
+                                tags={item.tags}
+                                categoria={item.categoria.nombre}
                             />
                         );
                     }}
