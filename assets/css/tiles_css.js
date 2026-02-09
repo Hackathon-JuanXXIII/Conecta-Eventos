@@ -71,3 +71,67 @@ export const tileExtra_css = StyleSheet.create({
         color: '#FFFFFF',
     }
 })
+
+export const tileEvento_css = StyleSheet.create({
+    contenedorEvento_base: {
+        maxWidth: '90%',
+        minWidth: '90%',
+        minHeight: 120,
+
+        flexDirection: 'row',
+        alignItems: 'center',
+
+        padding: 10,
+        marginBottom: 25,
+        // paddingVertical: 15,
+
+        backgroundColor: '#5099F8',
+        borderRadius: 15,
+    },
+    imagenEvento: {
+        width: 110,
+        height: 110,
+
+        borderRadius: 5,
+
+        backgroundColor: '#939393',
+    },
+    separator: {
+        width: 1,
+        height: '100%',
+
+        marginHorizontal: 10,
+
+        backgroundColor: 'white',
+    },
+    descEvento: {
+        paddingTop: 15,
+        flexDirection: 'column',
+
+        flex: 1,
+    },
+    nombreEvento: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+    },
+    categoriaEvento: {
+        color: '#FFFFFF',
+    },
+    tagsEvento : {
+        paddingHorizontal: 5,
+        paddingVertical: 3,
+
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    noTags: {
+        paddingHorizontal: 5,
+        paddingVertical: 3,
+        
+        alignContent: 'center',
+
+        backgroundColor: '#FFF333',
+        borderRadius: 5
+    }
+})
