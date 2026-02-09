@@ -71,3 +71,47 @@ export const tileExtra_css = StyleSheet.create({
         color: '#FFFFFF',
     }
 })
+export const tileEvento_css = StyleSheet.create({
+    contenedor: {
+        width: '90%',
+        minHeight: 85,
+        flexDirection: 'row',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 12,
+        marginVertical: 6,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        overflow: 'hidden',
+    },
+    fechaContainer: {
+        width: '25%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#5099F8',
+    },
+    dia: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+    },
+    mes: {
+        fontSize: 13,
+        fontWeight: '700',
+        color: '#FFFFFF',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+    },
+    nombreContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 15,
+    },
+    nombre: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#0B0B0B',
+    },
+});

@@ -1,6 +1,6 @@
 import { View, Pressable, Text, Image } from 'react-native';
 
-import { tile_css, tileExtra_css } from '../css/tiles_css';
+import { tile_css, tileExtra_css, tileEvento_css } from '../css/tiles_css';
 
 export function Tile({onPress, icono, titulo, desc}) {
     return (
@@ -37,17 +37,18 @@ export function TileExtra({onPress, icono, titulo}) {
     )
 }
 
-export function TileEvento({onPress, nombre, dia, mes, id_categoria}) {
+export function TileEvento({onPress, nombre, dia, mes}) {
     return (
         <Pressable
+            style={tileEvento_css.contenedor}
             onPress={onPress}
-            id={id_categoria}
         >
-            <View>
-                <Text>{dia} {mes}</Text>
+            <View style={tileEvento_css.fechaContainer}>
+                <Text style={tileEvento_css.dia}>{dia}</Text>
+                <Text style={tileEvento_css.mes}>{mes}</Text>
             </View>
-            <View>
-                <Text>{nombre}</Text>
+            <View style={tileEvento_css.nombreContainer}>
+                <Text style={tileEvento_css.nombre}>{nombre}</Text>
             </View>
         </Pressable>
     )
