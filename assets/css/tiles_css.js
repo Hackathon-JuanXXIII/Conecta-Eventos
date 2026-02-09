@@ -83,6 +83,7 @@ export const tileEvento_css = StyleSheet.create({
 
         padding: 10,
         marginBottom: 25,
+        // paddingVertical: 15,
 
         backgroundColor: '#5099F8',
         borderRadius: 15,
@@ -104,6 +105,7 @@ export const tileEvento_css = StyleSheet.create({
         backgroundColor: 'white',
     },
     descEvento: {
+        paddingTop: 15,
         flexDirection: 'column',
 
         flex: 1,
@@ -112,19 +114,24 @@ export const tileEvento_css = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#FFFFFF',
-        // backgroundColor: 'red'
     },
     categoriaEvento: {
         color: '#FFFFFF',
-
-        // fontSize: 8,
     },
     tagsEvento : {
-        maxWidth: '90%',
+        paddingHorizontal: 5,
+        paddingVertical: 3,
 
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    noTags: {
+        paddingHorizontal: 5,
+        paddingVertical: 3,
+        
+        alignContent: 'center',
 
-        backgroundColor: 'green'
+        backgroundColor: '#FFF333',
+        borderRadius: 5
     }
 })
