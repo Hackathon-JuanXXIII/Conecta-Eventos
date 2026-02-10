@@ -1,42 +1,47 @@
 import { View, Text, ScrollView, Image, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-
+// COmponentes
 import { BackBTN } from "../BackButton";
 
-
+// Consumir API
 import { fObtenerDetalleEvento } from "../../scripts/apiEvento";
 
-
+// Estilos
 import { detalleEvento_css } from "../../css/detalleEvento_css";
 
-function DetalleEventoContent({ route }) {
+function DetalleEventoContent({id}) {
     const insets = useSafeAreaInsets();
-    const { idEvento } = route.params; 
+
     const [evento, setEvento] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         const obtenerEvento = async() => {
-            setCargando(true);
-            setError(false);
+            // setCargando(true);
+            // setError(false);
             
-            const data = await fObtenerDetalleEvento(idEvento);
+            // const data = await fObtenerDetalleEvento(id);
             
-            if (data) {
-                setEvento(data);
-            } else {
-                setError(true);
-            }
+            // if (data) {
+            //     setEvento(data);
+            // } else {
+            //     setError(true);
+            // }
             
-            setCargando(false);
+            // setCargando(false);
+
+            
+            
         }
 
-        obtenerEvento();
-    }, [idEvento]);
+        // obtenerEvento();
+    // Antes -> }, [idEvento]); <- Solo interesa que se ejcute una sola vez, por eso se pone solo lo de abajo
+    }, []);
 
     const formatearFecha = (fechaString) => {
         const fecha = new Date(fechaString);
@@ -180,10 +185,14 @@ function DetalleEventoContent({ route }) {
     );
 }
 
-export function DetalleEventoView({ route }) {
+export function DetalleEventoView({route}) {
+    const {id} = route.params || {}
+
+    console.log('id -> ' + id);
+
     return (
         <SafeAreaProvider>
-            <DetalleEventoContent route={route} />
+            <DetalleEventoContent id={id}/>
         </SafeAreaProvider>
     );
 }

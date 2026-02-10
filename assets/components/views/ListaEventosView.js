@@ -20,6 +20,8 @@ import { fConsumirAPIEventos } from "../../scripts/apiEventos";
 function ListaEventosContent() {
     const insets = useSafeAreaInsets();
     const [respuesta, setRespuesta] = useState([])
+
+    const navigation = useNavigation()
     
     // Consume la funcion con la que consumir la API
     useEffect(() => {
@@ -49,7 +51,7 @@ function ListaEventosContent() {
             <View style={[listaEventos_css.screen,{paddingTop: insets.top}]}>
                 <BackBTN/>
 
-                <Text>Cargando eventos (Poner skeleton?)</Text>
+                <Text>Cargando eventos (Poner skeleton mientras carga?)</Text>
             </View>
         )
     } else {
@@ -71,6 +73,9 @@ function ListaEventosContent() {
                     renderItem={({item}) => {
                         return (
                             <TileEvento 
+                                onPress={() => navigation.navigate('DetalleEventoView', {
+                                    id: item.id
+                                })}
                                 nombre={item.nombre}
                                 id_categoria={item.id_categoria}
                                 imagen={{uri: imagen}}

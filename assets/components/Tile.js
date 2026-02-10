@@ -40,7 +40,7 @@ export function TileExtra({onPress, icono, titulo}) {
     )
 }
 
-export function TileEvento({onPress, nombre, id_categoria, imagen, categoria, tags}) {
+export function TileEvento({onPress, id, nombre, id_categoria, imagen, categoria, tags}) {
     const coloresTags = {
         1: '#BCE2D3', // Deportes
         2: '#F9B9D0', // Música
