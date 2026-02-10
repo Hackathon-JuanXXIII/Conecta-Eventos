@@ -5,6 +5,9 @@ export const navigationBackBTN_css = StyleSheet.create({
         width: 45,
         height: 45,
 
+        marginHorizontal: 10,
+        marginBottom: 10,
+
         backgroundColor: '#5099F8',
         borderRadius: 25,
 

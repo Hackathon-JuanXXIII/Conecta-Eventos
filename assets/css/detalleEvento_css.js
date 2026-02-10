@@ -2,12 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const detalleEvento_css = StyleSheet.create({
     contenedor: {
-        padding: 10,
-        
         backgroundColor: '#FFFFFF',
-    },
-    backBtnContainer: {
-        // padding: 20,
     },
     loadingContainer: {
         flex: 1,
