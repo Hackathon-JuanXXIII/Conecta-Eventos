@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 //react-navigation
 import { useNavigation } from "@react-navigation/native";
 
-// Componentes - CAMBIAR ESTA LÍNEA
+// Componentes
 import { BackBTN } from "../BackButton";
 import { TileEvento } from "../Tile";
 
@@ -49,8 +49,6 @@ function ListaEventosContent() {
     if (respuesta.length <= 0) {
         return (
             <View style={[listaEventos_css.screen,{paddingTop: insets.top}]}>
-                <BackBTN/>
-
                 <Text>Cargando eventos (Poner skeleton mientras carga?)</Text>
             </View>
         )
@@ -60,8 +58,6 @@ function ListaEventosContent() {
 
         return (
             <View style={{flex: 1, paddingTop: insets.top}}>
-                <BackBTN />
-
                 <FlatList style={listaEventos_css.lista}
                     // `style` afecta solo al marco de la lista, esta propiedad hace que se centre en el propio contenido
                     contentContainerStyle={listaEventos_css.screen}
@@ -93,6 +89,8 @@ function ListaEventosContent() {
 export function ListaEventosView() {
     return (
         <SafeAreaProvider>
+            <BackBTN />
+            
             <ListaEventosContent />
         </SafeAreaProvider>
     )
