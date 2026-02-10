@@ -1,21 +1,21 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList } from 'react-native'
 import React, {useEffect, useState} from 'react'
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 //react-navigation
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native'
 
 // Componentes
-import { BackBTN } from "../BackButton";
-import { TileEvento } from "../Tile";
+import { BackBTN } from '../BackBTN'
+import { TileEvento } from '../Tile'
 
 // Estilos CSS
-import { listaEventos_css } from "../../css/listaEventos_css";
+import { listaEventos_css } from '../../css/listaEventos_css'
 
 // Scripts
-import { fConsumirAPIEventos } from "../../scripts/apiEventos";
+import { fConsumirAPIEventos } from '../../scripts/apiEventos'
 
 function ListaEventosContent() {
     const insets = useSafeAreaInsets();
