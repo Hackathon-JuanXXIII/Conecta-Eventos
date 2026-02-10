@@ -58,6 +58,10 @@ function ListaEventosContent() {
 
         return (
             <View style={{flex: 1, paddingTop: insets.top}}>
+                <View style={{paddingVertical: 10}}>
+                    <BackBTN />
+                </View>
+
                 <FlatList style={listaEventos_css.lista}
                     // `style` afecta solo al marco de la lista, esta propiedad hace que se centre en el propio contenido
                     contentContainerStyle={listaEventos_css.screen}
@@ -88,10 +92,6 @@ function ListaEventosContent() {
 
 export function ListaEventosView() {
     return (
-        <SafeAreaProvider>
-            <BackBTN />
-            
-            <ListaEventosContent />
-        </SafeAreaProvider>
+        <ListaEventosContent />
     )
 }
