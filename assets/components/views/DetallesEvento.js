@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // COmponentes
-import { BackBTN } from "../BackButton";
+import { BackBTN } from "../BackBTN";
 
 // Consumir API
 import { fObtenerDetalleEvento } from "../../scripts/apiEvento";
@@ -22,28 +22,25 @@ function DetalleEventoContent({id}) {
 
     useEffect(() => {
         const obtenerEvento = async() => {
-            // setCargando(true);
-            // setError(false);
+            setCargando(true);
+            setError(false);
             
-            // const data = await fObtenerDetalleEvento(id);
+            const data = await fObtenerDetalleEvento(id);
             
-            // if (data) {
-            //     setEvento(data);
-            // } else {
-            //     setError(true);
-            // }
+            if (data) {
+                setEvento(data);
+            } else {
+                setError(true);
+            }
             
-            // setCargando(false);
-
-            
-            
+            setCargando(false);
         }
 
-        // obtenerEvento();
+        obtenerEvento();
     // Antes -> }, [idEvento]); <- Solo interesa que se ejcute una sola vez, por eso se pone solo lo de abajo
     }, []);
 
-    const formatearFecha = (fechaString) => {
+    const fFormatearFecha = (fechaString) => {
         const fecha = new Date(fechaString);
         return fecha.toLocaleDateString('es-ES', {
             day: 'numeric',
@@ -57,7 +54,6 @@ function DetalleEventoContent({id}) {
     if (cargando) {
         return (
             <View style={[detalleEvento_css.loadingContainer, { paddingTop: insets.top }]}>
-                <BackBTN />
                 <ActivityIndicator size="large" color="#5099F8" />
                 <Text style={detalleEvento_css.loadingText}>Cargando evento...</Text>
             </View>
@@ -76,101 +72,83 @@ function DetalleEventoContent({id}) {
         );
     }
 
-    return (
-        <ScrollView style={{ paddingTop: insets.top }}>
-            <View style={detalleEvento_css.backBtnContainer}>
-                <BackBTN />
-            </View>
+    const imagen = 'https://placehold.co/400x400/webp'
 
-            <View style={detalleEvento_css.container}>
-                <View style={detalleEvento_css.headerContainer}>
-                    <Text style={detalleEvento_css.titulo}>{evento.nombre}</Text>
-                    {evento.imagen_url && (
-                        <Image 
-                            style={detalleEvento_css.imagen}
-                            source={{ uri: evento.imagen_url }}
-                        />
-                    )}
-                </View>
-                
-                <View style={detalleEvento_css.infoContainer}>
+    return (
+        <View style={[detalleEvento_css.contenedor, {paddingTop: insets.top}, {flex: 1}]}>
+            <BackBTN />
+
+            <View style={[detalleEvento_css.headerContainer, {flex: 1}]}>
+                <Text style={detalleEvento_css.titulo}>{evento.nombre}</Text>
+                    <Image 
+                        style={detalleEvento_css.imagen}
+                        source={{uri: evento.imagen_url || imagen}}
+                    />
+
+                {/* `ScrollView` por que no va a ser una lista 100% dinamica */}
+                <ScrollView style={{flex: 1}}>
                     <View style={detalleEvento_css.infoRow}>
                         <Text style={detalleEvento_css.label}>♿ Accesible</Text>
                         <Text style={detalleEvento_css.value}>
-                            {evento.es_accesible ? "Sí" : "No"}
+                            {evento.es_accesible ? 'Sí' : 'No'}
                         </Text>
                     </View>
-                    {evento.id_categoria && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>🏷️ Categoría</Text>
-                            <Text style={detalleEvento_css.value}>
-                                Categoría {evento.categoria.nombre}
-                            </Text>
-                        </View>
-                    )}
-                    {evento.organizador && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>👤 Organizador</Text>
-                            <Text style={detalleEvento_css.value}>{evento.entidad.nombre}</Text>
-                        </View>
-                    )}
-                    {evento.creador && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>👤 Creado por</Text>
-                            <Text style={detalleEvento_css.value}>
-                                {evento.creador.nombre} {evento.creador.apellido}
-                            </Text>
-                        </View>
-                    )}
-                    {evento.valoracion && (
+
+                    <View style={detalleEvento_css.infoRow}>
+                        <Text style={detalleEvento_css.label}>🏷️ Categoría</Text>
+                        <Text style={detalleEvento_css.value}>
+                            {evento.categoria.nombre || 'Sin categoria'}
+                        </Text>
+                    </View>
+
+                    <View style={detalleEvento_css.infoRow}>
+                        <Text style={detalleEvento_css.label}>👤 Organizador</Text>
+                        <Text style={detalleEvento_css.value}>{evento.entidad.nombre || 'Anonimo'}</Text>
+                    </View>
+
+                    <View style={detalleEvento_css.infoRow}>
+                        <Text style={detalleEvento_css.label}>👤 Creado por</Text>
+                        <Text style={detalleEvento_css.value}>
+                            {evento.creador ?
+                                (evento.creador.nombre + ' ' + evento.creador.apellido) :
+                                ('Anonimo')
+                            }
+                        </Text>
+                    </View>
+
                     <View style={detalleEvento_css.infoRow}>
                         <Text style={detalleEvento_css.label}>⭐ Valoración</Text>
                         <Text style={detalleEvento_css.value}>
                             {Number(evento.valoracion).toFixed(1)} / 5
                         </Text>
                     </View>
-                    )}
+
                     <View style={detalleEvento_css.infoRow}>
                         <Text style={detalleEvento_css.label}>📅 Fecha de inicio</Text>
                         <Text style={detalleEvento_css.value}>
-                            {formatearFecha(evento.fecha_inicio_evento)}
+                            {fFormatearFecha(evento.fecha_inicio_evento)}
                         </Text>
                     </View>
 
-                    {evento.fecha_fin_evento && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>🏁 Fecha de fin</Text>
-                            <Text style={detalleEvento_css.value}>
-                                {formatearFecha(evento.fecha_fin_evento)}
-                            </Text>
-                        </View>
-                    )}
+                    <View style={detalleEvento_css.infoRow}>
+                        <Text style={detalleEvento_css.label}>📍 Ubicación</Text>
+                        <Text style={detalleEvento_css.value}>{evento.ubicacion || 'Sin determinar'}</Text>
+                    </View>
 
-                    {evento.ubicacion && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>📍 Ubicación</Text>
-                            <Text style={detalleEvento_css.value}>{evento.ubicacion}</Text>
-                        </View>
-                    )}
+                    <View style={detalleEvento_css.infoRow}>
+                        <Text style={detalleEvento_css.label}>👥 Participantes</Text>
+                        <Text style={detalleEvento_css.value}>
+                            {evento.num_participantes || 'Todavia nadie, apuntate!!'}
+                        </Text>
+                    </View>
 
-                    {evento.num_participantes !== null && (
-                        <View style={detalleEvento_css.infoRow}>
-                            <Text style={detalleEvento_css.label}>👥 Participantes</Text>
-                            <Text style={detalleEvento_css.value}>
-                                {evento.num_participantes}
-                            </Text>
-                        </View>
-                    )}
+                    <View style={detalleEvento_css.descripcionContainer}>
+                        <Text style={detalleEvento_css.label}>📝 Descripción</Text>
+                        <Text style={detalleEvento_css.descripcion}>
+                            {evento.descripcion || 'Disfrutar'}
+                        </Text>
+                    </View>
 
-                    {evento.descripcion && (
-                        <View style={detalleEvento_css.descripcionContainer}>
-                            <Text style={detalleEvento_css.label}>📝 Descripción</Text>
-                            <Text style={detalleEvento_css.descripcion}>
-                                {evento.descripcion}
-                            </Text>
-                        </View>
-                    )}
- 
                     {evento.tags && evento.tags.length > 0 && (
                         <View style={detalleEvento_css.infoRow}>
                             <Text style={detalleEvento_css.label}>🏷️ Tags</Text>
@@ -179,22 +157,23 @@ function DetalleEventoContent({id}) {
                             </Text>
                         </View>
                     )}
-                </View>
+                </ScrollView>
             </View>
-        </ScrollView>
-    );
+        </View>
+    )
 }
 
+// `route` vendria a ser como un objeto generado por el evento `onPress`,
+// el cual devuelve la propiedad `params`,
+// la cual hace refencia a los parametros pasados a la ruta
 export function DetalleEventoView({route}) {
     const {id} = route.params || {}
 
-    console.log('route -> ' + JSON.stringify(route));
-    console.log('route.params -> ' + JSON.stringify(route.params));
-    console.log('id -> ' + id);
+    // console.log('route -> ' + JSON.stringify(route));
+    // console.log('route.params -> ' + JSON.stringify(route.params));
+    // console.log('id -> ' + id);
 
     return (
-        <SafeAreaProvider>
-            <DetalleEventoContent id={id}/>
-        </SafeAreaProvider>
-    );
+        <DetalleEventoContent id={id}/>
+    )
 }

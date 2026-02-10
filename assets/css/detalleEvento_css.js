@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export const detalleEvento_css = StyleSheet.create({
-    contenedor: {
-        backgroundColor: '#FFFFFF',
+    headerContainer: {
+        padding: 10
     },
     loadingContainer: {
         flex: 1,
