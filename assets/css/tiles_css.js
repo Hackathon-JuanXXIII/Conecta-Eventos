@@ -74,8 +74,8 @@ export const tileExtra_css = StyleSheet.create({
 
 export const tileEvento_css = StyleSheet.create({
     contenedorEvento_base: {
-        maxWidth: '90%',
-        minWidth: '90%',
+        maxWidth: '95%',
+        minWidth: '98%',
         minHeight: 120,
 
         flexDirection: 'row',
