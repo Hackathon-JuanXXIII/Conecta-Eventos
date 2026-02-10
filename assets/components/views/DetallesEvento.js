@@ -188,6 +188,8 @@ function DetalleEventoContent({id}) {
 export function DetalleEventoView({route}) {
     const {id} = route.params || {}
 
+    console.log('route -> ' + JSON.stringify(route));
+    console.log('route.params -> ' + JSON.stringify(route.params));
     console.log('id -> ' + id);
 
     return (
