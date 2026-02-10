@@ -1,7 +1,10 @@
 import { View, Text, FlatList } from "react-native";
 import React, {useEffect, useState} from 'react'
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+//react-navigation
 import { useNavigation } from "@react-navigation/native";
 
 // Componentes - CAMBIAR ESTA LÍNEA
@@ -46,7 +49,7 @@ function ListaEventosContent() {
             <View style={[listaEventos_css.screen,{paddingTop: insets.top}]}>
                 <BackBTN/>
 
-                <Text>No hay eventos disponibles</Text>
+                <Text>Cargando eventos (Poner skeleton?)</Text>
             </View>
         )
     } else {
