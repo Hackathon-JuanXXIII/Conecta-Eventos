@@ -1,20 +1,11 @@
-import { Pressable, Image } from 'react-native';
-
 // React Navigation
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // Componentes
-import { PerfilView } from '../../components/views/PerfilView';
-import { ListaEventosView } from "../../components/views/ListaEventosView";
-import { DetalleEventoView } from "../../components/views/DetallesEvento";
-
-// Estilos CSS
-import { navigationBackBTN_css } from "../../css/navigationBackBTN_css";
-
-// Iconos
-import icono_atras from '../../icons/arrow-bend-up-left.webp'
+import { PerfilView } from '../../components/views/PerfilView'
+import { ListaEventosView } from '../../components/views/ListaEventosView'
+import { DetalleEventoView } from '../../components/views/DetallesEventoView'
 
 // propiedad options
 const stackoptions = {
