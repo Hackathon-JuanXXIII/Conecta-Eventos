@@ -49,17 +49,3 @@ export function NavigationPerfil() {
         </NavigationContainer>
     )
 }
-
-export function BackBTN() {
-    const navigation = useNavigation()
-
-    return (
-        <Pressable style={navigationBackBTN_css.contenedor}
-            onPress={() => navigation.goBack()}
-        >
-            <Image style={navigationBackBTN_css.icono}
-                source={icono_atras}
-            />
-        </Pressable>
-    )
-}
