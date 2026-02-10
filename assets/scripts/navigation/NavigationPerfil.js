@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 // Componentes
 import { PerfilView } from '../../components/views/PerfilView';
 import { ListaEventosView } from "../../components/views/ListaEventosView";
+import { DetalleEventoView } from "../../components/views/DetallesEvento";
 
 // Estilos CSS
 import { navigationBackBTN_css } from "../../css/navigationBackBTN_css";
@@ -36,6 +37,12 @@ export function NavigationPerfil() {
                 <Stack.Screen
                     name='ListaEventosView'
                     component={ListaEventosView}
+                    options={stackoptions}
+                />
+
+                <Stack.Screen
+                    name='DetalleEventoView'
+                    component={DetalleEventoView}
                     options={stackoptions}
                 />
             </Stack.Navigator>
